@@ -2,7 +2,8 @@ package com.hidemydevice.app;
 
 /** Location and non-field keys of the preference file shared between the UI and the hooks. */
 final class Prefs {
-    static final String PACKAGE = "com.hidemydevice.app";
+    /** The application id (not the Java package); must match applicationId in app/build.gradle. */
+    static final String PACKAGE = "io.github.imkamaran.hidemydevice";
     static final String NAME = "ids";
 
     /** boolean, default true: master switch for all spoofing. */

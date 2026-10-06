@@ -7,7 +7,8 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = 'com.hidemydevice.app'
+        // Must match the module repo name in Xposed-Modules-Repo
+        applicationId = 'io.github.imkamaran.hidemydevice'
         minSdk = 27
         // 34 keeps the classic (non edge-to-edge) window layout
         targetSdk = 34

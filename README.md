@@ -69,7 +69,7 @@ Classic Xposed and EdXposed get a best-effort fallback for sharing settings, but
 
 ## Installation
 
-1. Download the latest `HideMyDevice-*-release.apk` from [Releases](https://github.com/imkamaran/HideMyDevice/releases), or a build from the [Actions](https://github.com/imkamaran/HideMyDevice/actions) tab.
+1. Install it from the **LSPosed module repository** (LSPosed → Repository → search "Hide My Device", or [modules.lsposed.org](https://modules.lsposed.org/module/io.github.imkamaran.hidemydevice)). You can also download the latest `HideMyDevice-*-release.apk` from [Releases](https://github.com/imkamaran/HideMyDevice/releases), or a build from the [Actions](https://github.com/imkamaran/HideMyDevice/actions) tab.
 2. Install it.
 3. Open **LSPosed → Modules → Hide My Device**, switch **Enable module** on, and tick the apps you want to spoof.
 4. Open **Hide My Device** and set values (or tap **Random all**).
