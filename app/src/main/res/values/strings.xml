@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hide My Device</string>
+    <string name="xposed_description">Spoof device ids (IMEI, MAC, Android ID, SIM, MediaDrm…) for the apps you select.</string>
+    <string name="status_active">Module is active. Select the apps to spoof in your Xposed manager, then restart them.</string>
+    <string name="status_inactive">Module is not active. Enable it in LSPosed, select the apps to spoof, then reopen this app.</string>
+    <string name="not_set">Not set – real value is used</string>
+    <string name="random_all">Random all</string>
+    <string name="random">Random</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="saved">Saved. Restart the target apps to apply.</string>
+    <string name="value_hint">Value (empty = do not spoof)</string>
+    <string name="invalid_value">Expected: %1$s</string>
+    <string name="enable_spoofing">Enable spoofing</string>
+    <string name="random_each_launch">New random values every time an app starts</string>
+    <string name="copied">%1$s copied</string>
+    <string name="export_values">Export to file</string>
+    <string name="import_values">Import from file</string>
+    <string name="exported">Exported.</string>
+    <string name="export_failed">Export failed: %1$s</string>
+    <string name="imported">Imported %1$d values, skipped %2$d invalid. Restart the target apps to apply.</string>
+    <string name="import_failed">Import failed: %1$s</string>
+    <string name="clear_all">Clear all</string>
+    <string name="clear_all_message">Remove every spoofed value? Apps will see the real ids again.</string>
+
+    <string name="about">About</string>
+    <string name="back">Back</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_description">An open-source Xposed module that spoofs device identifiers, so third-party apps that track users cannot see your real ids.</string>
+    <string name="about_developer">Developer</string>
+    <string name="developer_name">Kamaran Raheem</string>
+    <string name="linkedin">LinkedIn</string>
+    <string name="github">GitHub</string>
+    <string name="about_open_source">Open source</string>
+    <string name="about_contribute">Hide My Device is free and open source. Bug reports, ideas and pull requests are welcome. Fork it and help make it better.</string>
+    <string name="source_code">Source code</string>
+    <string name="report_issue">Report an issue</string>
+    <string name="about_license">Released under the MIT License.</string>
+    <string name="no_browser">No browser found to open the link.</string>
+
+    <string name="cat_device">Device identifiers</string>
+    <string name="cat_model">Device model</string>
+    <string name="cat_network">Wi-Fi &amp; Bluetooth</string>
+    <string name="cat_sim">SIM &amp; mobile</string>
+</resources>

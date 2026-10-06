@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace = 'com.hidemydevice.app'
+    compileSdk = 36
+
+    defaultConfig {
+        applicationId = 'com.hidemydevice.app'
+        minSdk = 27
+        // 34 keeps the classic (non edge-to-edge) window layout
+        targetSdk = 34
+        versionCode = 1
+        versionName = '1.0.0'
+    }
+
+    // Release signing comes from environment variables (set by the GitHub workflow from repository
+    // secrets). Without them the release APK is signed with the debug key so it still installs.
+    def keystorePath = System.getenv('SIGNING_KEYSTORE_PATH')
+    signingConfigs {
+        release {
+            if (keystorePath) {
+                storeFile = file(keystorePath)
+                storePassword = System.getenv('SIGNING_STORE_PASSWORD')
+                keyAlias = System.getenv('SIGNING_KEY_ALIAS')
+                keyPassword = System.getenv('SIGNING_KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = true
+            shrinkResources = true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig = keystorePath ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError = false
+    }
+}
+
+dependencies {
+    implementation 'com.google.android.material:material:1.10.0'
+    compileOnly 'de.robv.android.xposed:api:82'
+}

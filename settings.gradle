@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = 'https://api.xposed.info/'
+            content { includeGroup 'de.robv.android.xposed' }
+        }
+    }
+}
+
+rootProject.name = 'HideMyDevice'
+include ':app'

@@ -1,0 +1,48 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Enable the module for app X
+        2. Set IMEI to ...
+        3. Force-stop and open app X
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and Android version
+      placeholder: Pixel 7, Android 14
+    validations:
+      required: true
+  - type: input
+    id: framework
+    attributes:
+      label: Root solution and LSPosed version
+      placeholder: Magisk 27, LSPosed 1.9.2 (Zygisk)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Hide My Device version
+      description: Shown on the About screen
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: LSPosed logs, filtered for "HideMyDevice" if possible
+      render: text

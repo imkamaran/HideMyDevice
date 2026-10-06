@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/clear_all"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/clear_all"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/export_values"
+        android:title="@string/export_values"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/import_values"
+        android:title="@string/import_values"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_info"
+        android:title="@string/about"
+        app:showAsAction="ifRoom" />
+</menu>
