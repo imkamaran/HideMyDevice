@@ -26,10 +26,17 @@ You decide which apps are affected: only the apps you tick in LSPosed see spoofe
 
 ## Features
 
-- **Spoof 18 identifiers** across four groups: device, device model, Wi-Fi & Bluetooth, SIM & mobile.
+- **Spoof 29 identifiers** across eight groups: device, device model, Wi-Fi & Bluetooth, SIM & mobile, timezone/region/GPS, keyboard, system privacy, and proxy & accounts.
 - **Edit or randomise** each value individually, or **randomise everything with one tap**.
 - **Realistic random values**: IMEI and ICCID carry valid Luhn check digits; MAC addresses are valid unicast addresses; SIM values (operator code, name, country, IMSI prefix, phone country code) always belong to the same real operator; brand, manufacturer and model always match a real phone.
-- **New identity on every app start** (optional): each launch of a target app gets fresh random values.
+- **Named profiles**: keep several identities and switch between them; create, rename and delete.
+- **New identity on every app start** (optional): each launch of a target app gets fresh random
+  identifiers. Configuration (hide lists, keyboard id, proxy) is never re-rolled.
+- **Coherent identities**: the SIM operator decides the timezone, region and GPS position too, so a
+  randomised device does not claim a German carrier while sitting in Tokyo.
+- **Privacy switches**: hide an active VPN, hide developer options and ADB, report Google Play as the
+  installer, block private LAN scans, hide nearby Wi-Fi scan results, add realistic sensor noise.
+- **Per-profile proxy**: route app traffic through an HTTP or SOCKS proxy, leaving loopback and LAN direct.
 - **Master switch** to turn spoofing off without losing your values.
 - **Export / import** your values as a JSON file.
 - **Long-press a value to copy it.**
@@ -56,6 +63,14 @@ You decide which apps are affected: only the apps you tick in LSPosed see spoofe
 | | Operator (MCC+MNC) | `getSimOperator`, `getNetworkOperator` |
 | | Operator name | `getSimOperatorName`, `getNetworkOperatorName`, carrier-ID names, `SubscriptionInfo.getCarrierName` |
 | | SIM country | `getSimCountryIso`, `getNetworkCountryIso`, `SubscriptionInfo.getCountryIso` |
+| Timezone, region & GPS | Timezone | `TimeZone.getDefault` |
+| | Region / country | `Locale.getDefault` (country only; the device language is kept) |
+| | Latitude, longitude | `Location.getLatitude`, `getLongitude`, `LocationManager.getLastKnownLocation` |
+| Keyboard & IME | Default keyboard | `Settings.Secure` `default_input_method` |
+| | Hidden keyboards | `InputMethodManager.getInputMethodList`, `getEnabledInputMethodList` |
+| System privacy | Hidden apps | `PackageManager.getInstalledPackages`, `getInstalledApplications` |
+| Proxy & accounts | Virtual Gmail accounts | `AccountManager.getAccounts`, `getAccountsByType` |
+| | Proxy host, port, type | `ProxySelector.getDefault` |
 
 Leave a field empty and the app sees the real value.
 
@@ -161,26 +176,39 @@ app/src/main/java/com/hidemydevice/app/
 
 These are good places to start contributing:
 
-- **Device profile isn't fully consistent.** Brand, manufacturer and model are spoofed, but `Build.FINGERPRINT`, `DEVICE` and `PRODUCT` are not. The IMEI's TAC (model prefix) is random rather than matching the chosen model.
-- **"New values per launch" is per process.** Apps with several processes may see different values in each one.
-- **The "active" banner** shows that LSPosed recognises the module, not that a given target app is in scope.
-- **Only `wlan0`** is covered for MAC addresses; Wi-Fi **scan results** are not hooked.
+- **Hiding an app only filters lists.** `getInstalledPackages` and `getInstalledApplications` are
+  filtered, but a direct `getPackageInfo("com.example")` still answers truthfully, and most detectors
+  ask by name rather than enumerating.
+- **Device profile isn't fully consistent.** Brand, manufacturer and model are spoofed, but
+  `Build.FINGERPRINT`, `DEVICE`, `PRODUCT` and the `ro.product.*` properties are not, which
+  contradicts them. The IMEI's TAC (model prefix) is random rather than matching the chosen model.
+- **Region is only spoofed for `Locale.getDefault`.** An app reading
+  `getResources().getConfiguration().getLocales()` still sees the real country.
+- **Every scoped app sees the same identity**, so apps can still correlate with each other.
+- **"New values per launch" is per process.** Apps with several processes may see different values in
+  each one, and an app that sees a new IMEI on every start can tell something is spoofing it.
+- **The "active" banner** shows that LSPosed recognises the module, not that a given target app is in
+  scope.
+- **Only `wlan0`** is covered for MAC addresses. Wi-Fi scan results are hidden (an empty list), not
+  replaced with plausible ones.
 - **Dual-SIM**: every slot gets the same IMEI; MEID isn't spoofed.
 - **Advertising ID** is only spoofed if the app ships Google's unobfuscated `AdvertisingIdClient`.
+- **VPN hiding** removes tunnel interfaces and clears the VPN transport, but an app that inspects
+  routing tables directly may still notice.
 - **Native code** (JNI, direct syscalls, reading `/sys` or `/proc` files) bypasses Java hooks.
 
 ## Roadmap
 
 Ideas we'd love help with:
 
-- [ ] Named **profiles** with quick switching
-- [ ] **Consistent device profiles** (fingerprint, device, product and IMEI TAC matching the model)
+- [ ] **Hide apps from direct lookups** (`getPackageInfo`, `getApplicationInfo`, `queryIntentActivities`)
+- [ ] **Consistent device profiles** (fingerprint, device, product, `ro.product.*` and IMEI TAC matching the model)
 - [ ] **Stable per-app randomisation** (seeded per app, consistent across processes)
+- [ ] **Spoof region for `Configuration.getLocales()`**, not just `Locale.getDefault`
 - [ ] **Pin a value** so "Random all" leaves it alone
-- [ ] Spoof Wi-Fi / Bluetooth **scan results** and block **LAN scanning**
+- [ ] Spoof Wi-Fi / Bluetooth **scan results** with plausible networks rather than hiding them
 - [ ] **WebView fingerprint** (user agent, canvas, navigator)
-- [ ] **Timezone, region and GPS** spoofing
-- [ ] In-app **hook log** viewer
+- [ ] In-app **verification screen** showing what a scoped app actually sees
 - [ ] Unit tests for `Randomizer` and validation
 - [ ] Translations
 
