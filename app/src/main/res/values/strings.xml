@@ -43,4 +43,30 @@
     <string name="cat_model">Device model</string>
     <string name="cat_network">Wi-Fi &amp; Bluetooth</string>
     <string name="cat_sim">SIM &amp; mobile</string>
+    <string name="cat_location_geo">Timezone, Region &amp; GPS</string>
+    <string name="cat_keyboard_app">Keyboard &amp; IME</string>
+    <string name="cat_system_privacy">System Privacy &amp; Hiding</string>
+    <string name="cat_proxies_accounts">Proxy &amp; Virtual Accounts</string>
+
+    <!-- Profiles -->
+    <string name="profile">Profile</string>
+    <string name="profile_actions">Profile options</string>
+    <string name="switch_profile">Switch</string>
+    <string name="select_profile">Select profile</string>
+    <string name="create_profile">New profile</string>
+    <string name="rename_profile">Rename profile</string>
+    <string name="delete_profile">Delete profile</string>
+    <string name="delete_profile_message">Delete &quot;%1$s&quot;? Its saved values are lost and the first profile becomes active.</string>
+    <string name="delete_profile_last">The last profile cannot be deleted.</string>
+    <string name="profile_name">Profile name</string>
+    <string name="new_profile">New profile</string>
+
+    <!-- Feature switches -->
+    <string name="hide_vpn">Hide active VPN connection</string>
+    <string name="hide_dev_mode">Hide developer options and ADB state</string>
+    <string name="spoof_play_store">Report Google Play as the installer</string>
+    <string name="spoof_lan_scan">Block private LAN scans</string>
+    <string name="spoof_wifi_scans">Hide nearby Wi-Fi scan results</string>
+    <string name="realistic_sensors">Add realistic sensor noise</string>
+    <string name="proxy_enabled">Send app traffic through the proxy below</string>
 </resources>
